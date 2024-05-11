@@ -2,12 +2,23 @@ import { useContext, useEffect, useState } from "react";
 import logo from "../../assets/images/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isDashboardOpen, setIsDashboardOpen] = useState(false);
 
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("Loged out Successful!");
+      })
+      .catch(() => {
+        toast.success("Logout failed");
+      });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -162,7 +173,7 @@ const Navbar = () => {
                 </div>
               </div>
               <Link
-                // onClick={handleLogOut}
+                onClick={handleLogOut}
                 className="btn  bg-[#74C138] text-white font-poppins rounded-3xl min-h-0 h-10 md:min-h-[3rem] md:h-[3rem] hidden md:flex"
               >
                 LogOut
