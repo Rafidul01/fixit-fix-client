@@ -1,3 +1,4 @@
+import { ClimbingBoxLoader } from "react-spinners";
 
 const Home = () => {
     return (
@@ -5,8 +6,8 @@ const Home = () => {
             <div className="h-96">
               <h1 >this is home</h1>  
             </div>
-            <div className="h-96">
-              <h1 >this is home</h1>  
+            <div className="h-96 flex justify-center items-center mt-28">
+            <ClimbingBoxLoader color="#74c138" />  
             </div>
             <div className="h-96">
               <h1 >this is home</h1>  

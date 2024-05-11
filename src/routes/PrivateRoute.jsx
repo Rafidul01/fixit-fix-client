@@ -2,13 +2,14 @@ import { useContext } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
 import { Navigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { ClimbingBoxLoader } from 'react-spinners';
 
 const PrivateRoute = ({children}) => {
     const {user, loading} = useContext(AuthContext);
     const location = useLocation();
     if(loading){
         return <div className='flex justify-center items-center mt-28'>
-            <div><span className="loading loading-infinity w-32 bg-[#FFA920]"></span></div>
+            <ClimbingBoxLoader color="#74c138" />
         </div>
     }
     if(user){
