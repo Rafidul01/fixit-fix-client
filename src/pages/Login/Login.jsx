@@ -1,20 +1,43 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaGithub, FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const { logIn } = useContext(AuthContext);
   const [eye, setEye] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const email = form.get("email");
+    const password = form.get("password");
+    logIn(email, password)
+      .then((result) => {
+        e.target.reset();
+        console.log(result.user);
+        toast.success("Login Successful!")
+        navigate(location?.state ? location.state : '/');
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("login failed..")
+      });
+    // console.log(name,email,photo,password);
+  };
   const handelSeePass = () => {
     setEye(!eye);
   };
   return (
     <div className="hero min-h-screen font-poppins mt-[68px] z-10">
       <div className="flex flex-col md:flex-row-reverse border-2 md:rounded-2xl border-[#74C138]  ">
-      <div className="text-center lg:text-left w-full md:w-[1/2] min-h-64  bg-[url('https://i.ibb.co/wQc3BmY/undraw-Access-account-re-8spm-2.png')] bg-center bg-cover shadow-xl  md:rounded-r-2xl flex justify-center items-center p-4 ">
+        <div className="text-center lg:text-left w-full md:w-[1/2] min-h-64  bg-[url('https://i.ibb.co/wQc3BmY/undraw-Access-account-re-8spm-2.png')] bg-center bg-cover shadow-xl  md:rounded-r-2xl flex justify-center items-center p-4 ">
           <div className="backdrop-blur-sm bg-white/5 w-full h-64 md:h-full  ">
             <div className="text-center md:h-full h-64 flex justify-center items-center flex-col ">
               <h1 className="text-3xl md:text-5xl font-bold text-black">
-               LogIn Here!
+                LogIn Here!
               </h1>
               <div className="py-6  text-black opacity-80  space-y-4">
                 <p>Back With A New Broken Device To Repair !?</p>
@@ -24,13 +47,10 @@ const Login = () => {
         </div>
         <div
           className="card shrink-0 w-full md:w-1/2 bg-base-100 rounded-l-none rounded-r-none rounded-2xl md:rounded-l-2xl"
-          data-aos="flip-left"
-          data-aos-easing="ease-out-cubic"
-          data-aos-duration="1000"
         >
           <div className="card-body">
             <form
-            // onSubmit={handleLogin}
+            onSubmit={handleLogin}
             >
               <div className="form-control">
                 <label className="label">
