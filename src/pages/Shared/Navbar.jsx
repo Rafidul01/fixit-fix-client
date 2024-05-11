@@ -103,7 +103,7 @@ const Navbar = () => {
   );
   return (
     <div
-      className={`fixed top-0 navbar bg-base-100 ${
+      className={`fixed top-0 z-50 navbar bg-base-100 ${
         scrolled ? "transition delay-100  bg-black bg-opacity-10 " : "bg-transparent"
       }`}
     >
