@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import logo from "../../assets/images/logo.png";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isDashboardOpen, setIsDashboardOpen] = useState(false);
+
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,14 +104,14 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className={`fixed top-0 right-0 left-0  bg-base-100 z-50 ${
-      scrolled
-        ? "transition delay-100  backdrop-blur-sm bg-white/5 border-b rounded-b-2xl border-opacity-30 border-[#74C138]"
-        : "bg-transparent"
-    }`}>
-      <div
-        className={"container mx-auto navbar"}
-      >
+    <div
+      className={`fixed top-0 right-0 left-0  bg-base-100 z-50 ${
+        scrolled
+          ? "transition delay-100  backdrop-blur-sm bg-white/5 border-b rounded-b-2xl border-opacity-30 border-[#74C138]"
+          : "bg-transparent"
+      }`}
+    >
+      <div className={"container mx-auto navbar"}>
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -148,7 +151,41 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{Links}</ul>
         </div>
         <div className="navbar-end space-x-1">
-          <Link
+          {user ? (
+            <>
+              <div
+                className="avatar hover:tooltip hover:tooltip-open hover:tooltip-bottom"
+                data-tip={user.displayName}
+              >
+                <div className="w-6 md:w-8 mr-2 md:mr-4 rounded-full ring ring-[#74C138] ring-offset-base-100 ring-offset-2 ">
+                  <img src={user.photoURL} />
+                </div>
+              </div>
+              <Link
+                // onClick={handleLogOut}
+                className="btn  bg-[#74C138] text-white font-poppins rounded-3xl min-h-0 h-10 md:min-h-[3rem] md:h-[3rem] hidden md:flex"
+              >
+                LogOut
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="btn hidden md:flex bg-[#74C138]  text-white font-poppins rounded-3xl min-h-0 h-10 md:min-h-[3rem] md:h-[3rem]"
+              >
+                LogIn
+              </Link>
+              <Link
+                to="/register"
+                className="btn hidden md:flex bg-[#74C138]  text-white font-poppins rounded-3xl min-h-0 h-10 md:min-h-[3rem] md:h-[3rem]"
+              >
+                Register
+              </Link>
+            </>
+          )}
+
+          {/* <Link
             to="/login"
             className="btn hidden md:flex bg-[#74C138]  text-white font-poppins rounded-3xl min-h-0 h-10 md:min-h-[3rem] md:h-[3rem]"
           >
@@ -159,7 +196,7 @@ const Navbar = () => {
             className="btn hidden md:flex bg-[#74C138]  text-white font-poppins rounded-3xl min-h-0 h-10 md:min-h-[3rem] md:h-[3rem]"
           >
             Register
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

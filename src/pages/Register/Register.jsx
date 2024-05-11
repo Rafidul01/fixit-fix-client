@@ -1,9 +1,57 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
+import { toast } from "react-toastify";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
-  const [eye, setEye] = useState(false);
+    const { createUser, setUpdate, update} = useContext(AuthContext);
+    const [eye, setEye] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const handleRegister = (e) =>{
+        e.preventDefault();
+        const form = new FormData(e.target);
+        const name = form.get('name');
+        const email = form.get('email');
+        const photo = form.get('photoUrl');
+        const password = form.get('password');
+
+        if(password.length < 6){
+          toast.error("Password must be at least 6 characters !")
+          return;
+        }
+        else if(!/[A-Z]/.test(password)){
+          toast.error("Password must have an Uppercase letter!")
+          return;
+        }
+        else if(!/[a-z]/.test(password)){
+          toast.error("Password must have a Lowercase letter!")
+          return;
+        }
+
+        createUser(email,password)
+        .then(result => {
+            console.log(result.user)
+            updateProfile(result.user,{
+                displayName: name,
+                photoURL: photo
+            })
+            .then(()=>{
+              setUpdate(!update);
+            })
+            .catch()
+            e.target.reset();
+            navigate(location?.state ? location.state : '/');
+            toast.success("Registered Successful!");
+        })
+        .catch(error => {
+            console.error(error);
+            toast.error("Sign Up Failed!");
+        })
+        // console.log(name,email,photo,password);
+    }
   const handelSeePass = () => {
     setEye(!eye);
   };
@@ -22,8 +70,9 @@ const Register = () => {
             </div>
           </div>
         </div>
-        {/* onSubmit={handleRegister} */}
+        {/* */}
         <div
+          onSubmit={handleRegister} 
           className="card shrink-0 w-full md:w-1/2    bg-base-100 rounded-l-none rounded-r-none rounded-2xl md:rounded-l-2xl"
           data-aos="flip-left"
           data-aos-easing="ease-out-cubic"
