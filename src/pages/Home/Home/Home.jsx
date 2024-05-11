@@ -2,7 +2,19 @@
 const Home = () => {
     return (
         <div>
-            <h1>this is home</h1>
+            <div className="h-96">
+              <h1 >this is home</h1>  
+            </div>
+            <div className="h-96">
+              <h1 >this is home</h1>  
+            </div>
+            <div className="h-96">
+              <h1 >this is home</h1>  
+            </div>
+            <div className="h-96">
+              <h1 >this is home</h1>  
+            </div>
+            
         </div>
     );
 };
