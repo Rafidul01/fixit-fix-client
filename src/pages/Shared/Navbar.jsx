@@ -143,7 +143,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="text-gray-500 menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               {Links}
             </ul>
@@ -153,13 +153,13 @@ const Navbar = () => {
             className="btn btn-ghost text-lg md:text-3xl text-start p-0 font-lato  font-normal"
           >
             <img src={logo} alt="" className="h-10" />
-            <h1>
+            <h1 className="text-gray-500">
               <span className="text-[#74C138]">Fixit-</span>Fix
             </h1>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{Links}</ul>
+          <ul className=" text-gray-500 font-bold menu menu-horizontal px-1">{Links}</ul>
         </div>
         <div className="navbar-end space-x-1">
           {user ? (

@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
-import { FaGithub, FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import { toast } from "react-toastify";
+import googleLogo from "../../assets/images/google.png"
 
 const Login = () => {
   const { logIn, googleLogIn } = useContext(AuthContext);
@@ -42,11 +43,11 @@ const Login = () => {
     setEye(!eye);
   };
   return (
-    <div className="hero min-h-screen font-poppins mt-[68px] z-10">
-      <div className="flex flex-col md:flex-row-reverse border-2 md:rounded-2xl border-[#74C138]  ">
-        <div className="text-center lg:text-left w-full md:w-[1/2] min-h-64  bg-[url('https://i.ibb.co/wQc3BmY/undraw-Access-account-re-8spm-2.png')] bg-center bg-cover shadow-xl  md:rounded-r-2xl flex justify-center items-center p-4 ">
-          <div className="backdrop-blur-sm bg-white/5 w-full h-64 md:h-full  ">
-            <div className="text-center md:h-full h-64 flex justify-center items-center flex-col ">
+    <div className="hero min-h-screen font-poppins mt-[68px] z-10 w-full container mx-auto">
+      <div className="flex flex-col md:flex-row-reverse border-2 md:rounded-2xl border-[#74C138] w-full ">
+        <div className="text-center lg:text-left w-full md:w-[1/2] min-h-64  bg-[url('https://i.ibb.co/wQc3BmY/undraw-Access-account-re-8spm-2.png')] bg-center bg-cover shadow-xl  md:rounded-r-2xl flex justify-center items-center  ">
+          <div className="backdrop-blur-sm bg-white/5 w-full h-64 md:h-full md:rounded-r-2xl  ">
+            <div className="text-center md:h-full h-64 flex justify-center items-center flex-col md:rounded-r-2xl ">
               <h1 className="text-3xl md:text-5xl font-bold text-black">
                 LogIn Here!
               </h1>
@@ -101,24 +102,19 @@ const Login = () => {
               <div>
                 <div className="mt-6 text-center ">
                   <div className="mb-4 flex gap-3 justify-center items-center">
-                    <hr className=" w-14 md:w-20 lg:w-40" />
-                    <h1 className="font-bold">Login With</h1>
-                    <hr className=" w-14 md:w-20 lg:w-40" />
+                    <hr className=" w-14 md:w-20 lg:w-20" />
+                    <h1 className="font-bold">Or With</h1>
+                    <hr className=" w-14 md:w-20 lg:w-20" />
                   </div>
-                  <div className="flex justify-center items-center gap-4">
+                  <div className="flex justify-center items-center ">
                     <button
                         onClick={handleGoogleLogIn}
-                      className="btn bg-[#74C138] hover:bg-[#416228] text-white"
+                      className="btn  hover:bg-[#416228] hover:text-white bg-transparent"
                     >
-                      <FaGoogle />
-                      Google
+                      <img src={googleLogo} className="h-6" alt="" />
+                      <h1 className="text-sm">Google</h1>
                     </button>
-                    <button
-                      //   onClick={handleGithubLogin}
-                      className="btn bg-[#74C138] hover:bg-[#416228] text-white"
-                    >
-                      <FaGithub></FaGithub> Github
-                    </button>
+                    
                   </div>
                 </div>
                 <p className="mt-4 text-center font-roboto text-lg">
