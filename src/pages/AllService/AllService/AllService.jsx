@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import ServiceCard from "../ServiceCard/ServiceCard";
 
 const AllService = () => {
   const { isPending , data: services } = useQuery({
@@ -15,9 +16,11 @@ const AllService = () => {
   }
 
   return (
-    <div className="container mx-auto">
-      <div>
-        <h1>{services ? services.length : 0}</h1> 
+    <div className="container mx-auto mt-20">
+      <div className="grid grid-cols-1 gap-4"> 
+        {
+          services?.map((service) => <ServiceCard key={service._id} service={service}/>)
+        }
       </div>
     </div>
   );
