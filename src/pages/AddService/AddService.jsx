@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import bgImg from "../../assets/images/AddServiceBack.jpg";
 import { AuthContext } from "../../provider/AuthProvider";
+// import useAxiosSecure from "../../hooks/useAxiosSecure";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddService = () => {
     const {user} = useContext(AuthContext);
+    // const axiosSecure = useAxiosSecure();
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
@@ -12,8 +16,24 @@ const AddService = () => {
     const area = form.get("serviceArea");
     const description = form.get("serviceDescription");
     const img = form.get("sImageURL");
-    const service = { name, price, description, img, area };
-    console.log(service);
+    const userEmail = user?.email;
+    const userName = user?.displayName;
+    const userImage = user?.photoURL;
+    const views = 0;
+    const booked = 0;
+    const service = { name, price, description, img, area, userEmail, userName, userImage, views, booked};
+    axios.post("http://localhost:5000/service", service)
+    .then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire({
+            title: 'Success!',
+            text: 'Service Added Successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          })
+        e.target.reset();
+      }
+    });
   };
   return (
     <div className="font-roboto ">
