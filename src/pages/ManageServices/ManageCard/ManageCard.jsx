@@ -6,7 +6,10 @@ import { FiShoppingCart } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
 import { TbCoinTaka } from "react-icons/tb";
 import { Link } from "react-router-dom";
-const ManageCard = ({ service }) => {
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+const ManageCard = ({ service,services, setServices }) => {
+    const axiosSecure = useAxiosSecure();
   const {
     _id,
     name,
@@ -20,6 +23,33 @@ const ManageCard = ({ service }) => {
     views,
     booked,
   } = service;
+
+  const handleDelete = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/service/${_id}`)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.deletedCount) {
+                setServices(services.filter((x) => service._id !== x._id));
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Service has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl font-poppins relative">
       <figure className="lg:w-1/3">
@@ -86,7 +116,7 @@ const ManageCard = ({ service }) => {
             Edit
           </Link>
           <Link
-            
+            onClick={() => handleDelete(_id)}
             className="btn w-1/2 bg-transparent border-[#74C138] text-[#74C138] hover:text-white hover:bg-[#74C138]"
           >
             Delete
@@ -99,5 +129,7 @@ const ManageCard = ({ service }) => {
 
 ManageCard.propTypes = {
   service: PropTypes.object,
+  setServices: PropTypes.func,
+  services: PropTypes.array,
 };
 export default ManageCard;
