@@ -32,7 +32,7 @@ const ServiceCard = ({ service }) => {
 
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl font-poppins relative">
-      <figure className="md:w-1/3">
+      <figure className="lg:w-1/3">
         <img src={img} alt="Album" className="h-full w-full" />
       </figure>
       <div className="notice w-16 h-6 rounded-r-3xl absolute top-5 left-0 bg-[#74C138] flex items-center justify-center gap-1 text-white">
@@ -41,7 +41,7 @@ const ServiceCard = ({ service }) => {
       <div className="notice w-16 h-6 rounded-r-3xl absolute top-12 left-0 bg-[#3891c1] flex items-center justify-center gap-1 text-white">
         <FaEye /> {views}
       </div>
-      <div className="card-body md:w-2/3">
+      <div className="card-body lg:w-2/3">
         <h2 className="font-bold text-xl text-center">{name}</h2>
         <p className="text-center text-xs md:text-sm opacity-80 ">
           {description}
