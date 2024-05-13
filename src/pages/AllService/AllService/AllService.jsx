@@ -54,9 +54,9 @@ const AllService = () => {
   return (
     <div className="container mx-auto mt-20">
       <h1 className="text-4xl font-bold text-center mb-4">All Services</h1>
-      <div className="flex gap-4 justify-center items-center mb-8">
+      <div className="flex flex-col-reverse md:flex-row gap-4 justify-center items-center mb-8">
         {/* filter */}
-        <div>
+        <div className="flex gap-4 justify-between items-center">
           <select
             className="select select-bordered"
             name="serviceArea"
@@ -68,6 +68,13 @@ const AllService = () => {
             <option>Most Booked</option>
             <option>Most Viewed</option>
           </select>
+
+          {/* reset */}
+        <div className="block md:hidden">
+          <Link onClick={handleReset} className="btn ">
+            Reset
+          </Link>
+        </div>
         </div>
 
         {/* search */}
@@ -87,7 +94,7 @@ const AllService = () => {
         </div>
 
         {/* reset */}
-        <div>
+        <div className="hidden md:block">
           <Link onClick={handleReset} className="btn ">
             Reset
           </Link>
