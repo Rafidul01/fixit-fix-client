@@ -1,25 +1,48 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import ServiceCard from "../ServiceCard/ServiceCard";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
 
 const AllService = () => {
-  const { isPending, data: services } = useQuery({
-    queryKey: ["services"],
-    queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/services");
-      return res.data;
-    },
-  });
+  const axiosSecure = useAxiosSecure();
+  const [services, setServices] = useState([]);
+  const [filter, setFilter] = useState(null);
 
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    axiosSecure
+      .get(`/services?sort=${filter}`)
+      .then((res) => setServices(res.data));
+  }, [filter, axiosSecure]);
 
+  // const { isPending, data: services } = useQuery({
+  //   queryKey: ["services"],
+  //   queryFn: async (filter) => {
+  //     const res = await axiosSecure.get(`/services?sort=${filter}`);
+  //     return res.data;
+  //   },
+  // });
+
+  // if (isPending) {
+  //   return <div>Loading...</div>;
+  // }
+
+  const handleFilter = (e) => {
+    const value = e.target.value;
+    if (value === "Most Viewed") {
+      setFilter("views");
+    }
+    if (value === "Most Booked") {
+      setFilter("booked");
+    }
+  };
+  const handleReset = () => {
+    setFilter(null);
+  };
   return (
     <div className="container mx-auto mt-20">
       <h1 className="text-4xl font-bold text-center mb-4">All Services</h1>
-      <div  className="flex gap-4 justify-center items-center mb-8" >
+      <div className="flex gap-4 justify-center items-center mb-8">
         {/* filter */}
         <div>
           <select
@@ -27,6 +50,7 @@ const AllService = () => {
             name="serviceArea"
             required
             defaultValue="Filter"
+            onChange={handleFilter}
           >
             <option disabled>Filter</option>
             <option>Most Booked</option>
@@ -35,20 +59,24 @@ const AllService = () => {
         </div>
 
         {/* search */}
-        <div >
+        <div>
           <form action="" className="flex ">
             <input
               type="text"
               placeholder="Search"
               className="input input-bordered w-full max-w-xs rounded-r-none border-r-0"
             />
-            <button className="btn rounded-l-none bg-[#74C138] text-white hover:text-[#74C138] hover:bg-transparent">Search</button>
+            <button className="btn rounded-l-none bg-[#74C138] text-white hover:text-[#74C138] hover:bg-transparent">
+              Search
+            </button>
           </form>
         </div>
 
         {/* reset */}
         <div>
-          <Link className="btn ">Reset</Link>
+          <Link onClick={handleReset} className="btn ">
+            Reset
+          </Link>
         </div>
       </div>
       <div className="grid grid-cols-1 gap-4">

@@ -19,8 +19,8 @@ const AddService = () => {
     const userEmail = user?.email;
     const userName = user?.displayName;
     const userImage = user?.photoURL;
-    const views = 0;
-    const booked = 0;
+    const views = "0";
+    const booked = "0";
     const service = { name, price, description, img, area, userEmail, userName, userImage, views, booked };
     axios.post("http://localhost:5000/service", service)
     .then((res) => {
