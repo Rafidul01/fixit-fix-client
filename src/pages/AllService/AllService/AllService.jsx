@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import ServiceCard from "../ServiceCard/ServiceCard";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -7,13 +7,14 @@ import { useEffect, useState } from "react";
 const AllService = () => {
   const axiosSecure = useAxiosSecure();
   const [services, setServices] = useState([]);
-  const [filter, setFilter] = useState(null);
+  const [filter, setFilter] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     axiosSecure
-      .get(`/services?sort=${filter}`)
+      .get(`/services?sort=${filter}&search=${search}`)
       .then((res) => setServices(res.data));
-  }, [filter, axiosSecure]);
+  }, [filter, axiosSecure, search]);
 
   // const { isPending, data: services } = useQuery({
   //   queryKey: ["services"],
@@ -38,6 +39,17 @@ const AllService = () => {
   };
   const handleReset = () => {
     setFilter(null);
+    setSearch("");
+    
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const search = form.get("search");
+    setSearch(search);
+    console.log(search);
+    
   };
   return (
     <div className="container mx-auto mt-20">
@@ -49,7 +61,7 @@ const AllService = () => {
             className="select select-bordered"
             name="serviceArea"
             required
-            defaultValue="Filter"
+            defaultValue={filter ? filter : "Filter"}
             onChange={handleFilter}
           >
             <option disabled>Filter</option>
@@ -60,10 +72,12 @@ const AllService = () => {
 
         {/* search */}
         <div>
-          <form action="" className="flex ">
+          <form action="" className="flex " onSubmit={handleSearch}>
             <input
               type="text"
               placeholder="Search"
+              name="search"
+
               className="input input-bordered w-full max-w-xs rounded-r-none border-r-0"
             />
             <button className="btn rounded-l-none bg-[#74C138] text-white hover:text-[#74C138] hover:bg-transparent">
@@ -80,9 +94,16 @@ const AllService = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 gap-4">
-        {services?.map((service) => (
+        {
+        services?.length === 0 ? (
+          <p className="text-center">No service found</p>
+        ) :
+        services?.map((service) => (
           <ServiceCard key={service._id} service={service} />
-        ))}
+        ))
+        
+        }
+
       </div>
     </div>
   );
