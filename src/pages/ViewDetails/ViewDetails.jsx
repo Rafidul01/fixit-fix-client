@@ -130,8 +130,10 @@ const ViewDetails = () => {
         </div>
       </div>
             <div className="card-actions justify-end mt-2">
+
+                
               <Link
-                // to={`/service/${_id}`}
+                to={`/service/booking/${id}`}
                 className="btn w-full bg-transparent border-[#74C138] text-[#74C138] hover:text-white hover:bg-[#74C138]"
               >
                 Book Now
