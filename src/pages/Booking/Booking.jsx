@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 const Booking = () => {
   const { id } = useParams();
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
 
   const { isPending, data: service } = useQuery({
@@ -21,14 +21,7 @@ const Booking = () => {
   if (isPending) {
     return <div>Loading...</div>;
   }
-  const {
-    _id,
-    name,
-    price,
-    img,
-    userEmail,
-    userName,
-  } = service;
+  const { _id, name, price, img, userEmail, userName } = service;
   console.log(service);
 
   const handleSubmit = (e) => {
@@ -45,27 +38,28 @@ const Booking = () => {
       price,
       providerEmail: userEmail,
       providerName: userName,
-      purchaseName : user?.displayName,
-      purchaseEmail : user?.email,
-      purchaseImage : user?.photoURL,
+      purchaseName: user?.displayName,
+      purchaseEmail: user?.email,
+      purchaseImage: user?.photoURL,
       status: "pending",
-    };  
+    };
     console.log(bookedService);
-    axiosSecure.post("/booked", bookedService)
-      .then((res) => {
-        if (res.data.insertedId) {
-          Swal.fire({
-            title: "Success!",
-            text: "Booked Successfully!", 
-            icon: "success",
-            confirmButtonText: "OK",
-          });
-        //   e.target.reset();
-        }
-      });
-  };    
-  
-  return (  
+    axiosSecure.post("/booked", bookedService).then((res) => {
+      if (res.data.insertedId) {
+        axiosSecure.patch(`/service/booked/${_id}`,{}).then((res) => {
+          console.log(res.data);
+        });
+        Swal.fire({
+          title: "Success!",
+          text: "Booked Successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      }
+    });
+  };
+
+  return (
     <div className="font-roboto ">
       <div
         className="hero min-h-screen bg-base-200 "
@@ -77,10 +71,7 @@ const Booking = () => {
       >
         <div className="mt-[75px] md:mt-[80px] lg:mt-[80px">
           <div className="card shrink-0 w-[300px] md:w-[700px] lg:w-[900px] h-full shadow-2xl backdrop-blur-sm bg-white/20 mx-auto">
-            <form
-              className="card-body"
-              onSubmit={handleSubmit}
-            >
+            <form className="card-body" onSubmit={handleSubmit}>
               <div className=" ">
                 <img
                   src={img}
@@ -90,7 +81,7 @@ const Booking = () => {
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-base-300 ">
-                     Service ID
+                      Service ID
                     </span>
                   </label>
                   <input
@@ -173,9 +164,7 @@ const Booking = () => {
               <div className="flex justify-between gap-2 flex-col md:flex-row">
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text text-base-300">
-                      Your Name
-                    </span>
+                    <span className="label-text text-base-300">Your Name</span>
                   </label>
                   <input
                     type="text"
@@ -188,9 +177,7 @@ const Booking = () => {
                 </div>
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text text-base-300">
-                      Your Email
-                    </span>
+                    <span className="label-text text-base-300">Your Email</span>
                   </label>
                   <input
                     type="text"
@@ -206,9 +193,7 @@ const Booking = () => {
               <div className="flex justify-between gap-2 flex-col md:flex-row">
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text text-base-300">
-                      price
-                    </span>
+                    <span className="label-text text-base-300">price</span>
                   </label>
                   <input
                     type="text"
@@ -221,9 +206,7 @@ const Booking = () => {
                 </div>
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text text-base-300">
-                      Date
-                    </span>
+                    <span className="label-text text-base-300">Date</span>
                   </label>
                   <input
                     type="date"
@@ -231,7 +214,6 @@ const Booking = () => {
                     placeholder="Provider Email"
                     className="input input-bordered"
                     required
-                    
                   />
                 </div>
               </div>
@@ -254,7 +236,7 @@ const Booking = () => {
 
               <div className="form-control mt-6">
                 <button className="btn border border-[#74C138] bg-black bg-opacity-60 hover:bg-[#74C138]  hover:text-white text-[#74C138]">
-                  Add Service
+                  Purchase
                 </button>
               </div>
             </form>
@@ -262,7 +244,6 @@ const Booking = () => {
         </div>
       </div>
     </div>
-
   );
 };
 
