@@ -110,7 +110,7 @@ const ManageCard = ({ service,services, setServices }) => {
         </div>
         <div className="flex flex-row justify-between mt-2 gap-1">
           <Link
-            
+            to={`/service/update/${_id}`}
             className="btn w-1/2  bg-transparent border-[#74C138] text-[#74C138] hover:text-white hover:bg-[#74C138]"
           >
             Edit

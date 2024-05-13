@@ -9,6 +9,7 @@ import ViewDetails from "../pages/ViewDetails/ViewDetails";
 import Booking from "../pages/Booking/Booking";
 import PrivateRoute from "./PrivateRoute";
 import ManageServices from "../pages/ManageServices/ManageServices";
+import EditService from "../pages/ManageServices/EditService/EditService";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
         {
           path:"/manageService",
           element: <PrivateRoute><ManageServices/></PrivateRoute>
+        },
+        {
+          path:"/service/update/:id",
+          element: <EditService/>
         }
     ]
   },
