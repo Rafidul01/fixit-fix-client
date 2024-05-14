@@ -21,9 +21,9 @@ const PopularCard = ({service}) => {
         booked,
       } = service;
     return (
-<div className="card  bg-base-100 shadow-xl font-poppins relative">
+<div className="card  bg-base-100 shadow-xl font-poppins relative border border-[#74C138]">
       <figure className="">
-        <img src={img} alt="Album" className="h-[500px] w-full" />
+        <img src={img} alt="Album" className=" h-[200px] md:h-[300px] lg:h-[400px] w-full" />
       </figure>
       <div className="notice w-16 h-6 rounded-r-3xl absolute top-5 left-0 bg-[#74C138] flex items-center justify-center gap-1 text-white">
         <FiShoppingCart /> {booked}

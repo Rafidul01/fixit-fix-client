@@ -11,7 +11,7 @@ const ManageServices = () => {
     const axiosSecure = useAxiosSecure();
     const [services, setServices] = useState([]);
 
-    const { isPending,  } = useQuery({
+    const { isPending, manageservices } = useQuery({
         queryKey: ['manageservices'],
         queryFn: async () => {
           const res = await axiosSecure.get(`/service/manage/${user?.email}`);
@@ -23,6 +23,12 @@ const ManageServices = () => {
     if(isPending){
         return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
         <ClimbingBoxLoader color="#74c138" />
+    </div>
+    }
+
+    if(!manageservices){
+        return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+        You din not add any service yet!
     </div>
     }
   return (

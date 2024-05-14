@@ -73,7 +73,6 @@ const AllService = () => {
           >
             <option disabled>Filter</option>
             <option>Most Booked</option>
-            <option>Most Viewed</option>
           </select>
 
           {/* reset */}

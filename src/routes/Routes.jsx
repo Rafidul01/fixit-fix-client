@@ -12,11 +12,13 @@ import ManageServices from "../pages/ManageServices/ManageServices";
 import EditService from "../pages/ManageServices/EditService/EditService";
 import BookedServices from "../pages/BookedServices/BookedServices";
 import ServiceToDo from "../pages/ServiceToDo/ServiceToDo";
+import Error from "../pages/Error/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <Error></Error> ,
     children: [
         {
             path:"/",

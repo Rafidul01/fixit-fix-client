@@ -54,7 +54,7 @@ const Register = () => {
     setEye(!eye);
   };
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto mb-8">
       <div className="hero min-h-screen font-poppins mt-[68px] z-10 ">
         <div className="flex flex-col md:flex-row-reverse  border-2 md:rounded-2xl border-[#74c138] w-full ">
           <div className="text-center lg:text-left w-full md:w-[1/2] min-h-64  bg-[url('https://i.ibb.co/wQc3BmY/undraw-Access-account-re-8spm-2.png')] bg-center bg-cover shadow-xl  md:rounded-r-2xl flex justify-center items-center  ">
