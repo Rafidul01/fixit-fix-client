@@ -18,6 +18,9 @@ const BookedServices = () => {
   if (isPending) {
     return <div>Loading...</div>;
   }
+  if(services.length === 0){
+    return <div className="text-center mt-72 font-bold text-xl ">You do not have any service booked!</div>    
+  }
 
   return (
     <div>
