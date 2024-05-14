@@ -5,7 +5,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 const FeedBack = () => {
  
   return (
-    <div className="z-0 container mx-auto border rounded-2xl mt-16 font-poppins">
+    <div className="z-0 container mx-auto border border-[#74C138] rounded-2xl mt-16 font-poppins">
         <div>
         <h1 className="text-center font-bold text-2xl  mt-8 ">
           Feedbacks 

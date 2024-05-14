@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { ClimbingBoxLoader } from "react-spinners";
 import FeedBack from "../FeedBack/FeedBack";
+import WhatWeDo from "../../WhatWeDo/WhatWeDo";
 
 const Home = () => {
   const axiosSecure = useAxiosSecure();
@@ -25,7 +26,7 @@ const Home = () => {
           <Banner></Banner>
           <PopularService popularServices={popularServices}></PopularService>
           <FeedBack></FeedBack>
-            
+          <WhatWeDo></WhatWeDo> 
         </div>
     );
 };
