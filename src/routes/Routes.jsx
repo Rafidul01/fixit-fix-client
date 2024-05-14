@@ -10,6 +10,7 @@ import Booking from "../pages/Booking/Booking";
 import PrivateRoute from "./PrivateRoute";
 import ManageServices from "../pages/ManageServices/ManageServices";
 import EditService from "../pages/ManageServices/EditService/EditService";
+import BookedServices from "../pages/BookedServices/BookedServices";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
         {
           path:"/service/update/:id",
           element: <EditService/>
+        },
+        {
+          path:"/bookedServices",
+          element: <PrivateRoute><BookedServices/></PrivateRoute>
         }
     ]
   },
