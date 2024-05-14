@@ -4,6 +4,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import bgImg from "../../assets/images/AddServiceBack.jpg";
 import ToDo from "./ToDo";
+import { ClimbingBoxLoader } from "react-spinners";
 
 const ServiceToDo = () => {
   const axiosSecure = useAxiosSecure();
@@ -18,7 +19,9 @@ const ServiceToDo = () => {
   });
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+    <ClimbingBoxLoader color="#74c138" />
+</div>
   }
 
   if(services.length === 0){

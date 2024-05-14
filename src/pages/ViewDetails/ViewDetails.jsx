@@ -6,6 +6,7 @@ import { CgProfile } from "react-icons/cg";
 import { MdEmail } from "react-icons/md";
 import { TbCoinTaka } from "react-icons/tb";
 import { CiLocationOn } from "react-icons/ci";
+import { ClimbingBoxLoader } from "react-spinners";
 
 const ViewDetails = () => {
   const [views, setViews] = useState(0);
@@ -25,7 +26,9 @@ const ViewDetails = () => {
       .then((res) => console.log(res.data));
   }, [views, id, axiosSecure]);
   if (isPending) {
-    return <div>Loading...</div>;
+    return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+    <ClimbingBoxLoader color="#74c138" />
+</div>;
   }
 
   console.log(service);
@@ -41,7 +44,7 @@ const ViewDetails = () => {
   } = service;
 
   return (
-    <div className="mt-20 font-roboto">
+    <div className="mt-20 font-roboto mb-8">
       <div className="">
         <h1 className="text-3xl text-center mb-8">
           Welcome to {service?.name} Service

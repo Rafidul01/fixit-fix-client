@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { ClimbingBoxLoader } from "react-spinners";
 
 const Booking = () => {
   const { id } = useParams();
@@ -19,7 +20,9 @@ const Booking = () => {
     },
   });
   if (isPending) {
-    return <div>Loading...</div>;
+    return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+    <ClimbingBoxLoader color="#74c138" />
+</div>
   }
   const { _id, name, price, img, userEmail, userName } = service;
   console.log(service);
@@ -69,7 +72,7 @@ const Booking = () => {
           backgroundPosition: "center",
         }}
       >
-        <div className="mt-[75px] md:mt-[80px] lg:mt-[80px">
+        <div className="mt-[75px] md:mt-[80px] lg:mt-[80px] mb-20">
           <div className="card shrink-0 w-[300px] md:w-[700px] lg:w-[900px] h-full shadow-2xl backdrop-blur-sm bg-white/20 mx-auto">
             <form className="card-body" onSubmit={handleSubmit}>
               <div className=" ">

@@ -26,12 +26,14 @@ const ManageServices = () => {
     </div>
     }
   return (
-    <div className="font-roboto grid grid-cols-1 gap-5 mt-20">
+    <div className="font-roboto grid grid-cols-1 gap-5 mt-20 mb-8">
         <h1 className="text-3xl font-bold text-center mx-4
         ">Manage Your Services</h1>
       {
         services ? services.map((service) => <ManageCard key={service._id} service={service} services={services} setServices={setServices}/>) :
-        <div>No service found</div>}
+        <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+            You din not add any service yet!
+        </div>}
     </div>
   );
 };

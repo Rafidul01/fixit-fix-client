@@ -3,17 +3,22 @@ import ServiceCard from "../ServiceCard/ServiceCard";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
+import { ClimbingBoxLoader } from "react-spinners";
 
 const AllService = () => {
   const axiosSecure = useAxiosSecure();
   const [services, setServices] = useState([]);
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
+  const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
     axiosSecure
       .get(`/services?sort=${filter}&search=${search}`)
-      .then((res) => setServices(res.data));
+      .then((res) => {
+        setServices(res.data);
+        setIsPending(false);
+      });
   }, [filter, axiosSecure, search]);
 
   // const { isPending, data: services } = useQuery({
@@ -24,9 +29,11 @@ const AllService = () => {
   //   },
   // });
 
-  // if (isPending) {
-  //   return <div>Loading...</div>;
-  // }
+  if (isPending) {
+    return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+    <ClimbingBoxLoader color="#74c138" />
+</div>;
+  }
 
   const handleFilter = (e) => {
     const value = e.target.value;
@@ -52,7 +59,7 @@ const AllService = () => {
     
   };
   return (
-    <div className="container mx-auto mt-20">
+    <div className="container mx-auto mt-20 mb-8">
       <h1 className="text-4xl font-bold text-center mb-4">All Services</h1>
       <div className="flex flex-col-reverse md:flex-row gap-4 justify-center items-center mb-8">
         {/* filter */}
@@ -103,7 +110,9 @@ const AllService = () => {
       <div className="grid grid-cols-1 gap-4">
         {
         services?.length === 0 ? (
-          <p className="text-center">No service found</p>
+          <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+            <h1> No service found </h1>
+      </div>
         ) :
         services?.map((service) => (
           <ServiceCard key={service._id} service={service} />

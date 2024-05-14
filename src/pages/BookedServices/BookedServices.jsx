@@ -3,6 +3,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import bgImg from "../../assets/images/AddServiceBack.jpg";
+import { ClimbingBoxLoader } from "react-spinners";
 const BookedServices = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
@@ -16,7 +17,9 @@ const BookedServices = () => {
   });
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+    <ClimbingBoxLoader color="#74c138" />
+</div>
   }
   if(services.length === 0){
     return <div className="text-center pt-60 font-bold text-xl min-h-[calc(100vh-260.8px)] ">You do not have any service booked!</div>    

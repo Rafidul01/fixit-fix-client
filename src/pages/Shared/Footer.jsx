@@ -3,7 +3,7 @@ import logo from "../../assets/images/logo.png";
 
 const Footer = () => {
   return (
-    <div className="  border-t shadow-2xl border-[#74C138] text-base-content  font-lato rounded-t-3xl  backdrop-blur-sm bg-green-500/5">
+    <div className="  border-t shadow-2xl border-[#74C138] text-base-content  font-lato  backdrop-blur-sm bg-green-500/5">
       <footer className="footer p-10 container mx-auto items-center">
         <aside>
           <img

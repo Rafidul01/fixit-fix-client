@@ -51,7 +51,7 @@ const ManageCard = ({ service,services, setServices }) => {
     });
   };
   return (
-    <div className="card lg:card-side bg-base-100 shadow-xl font-poppins relative">
+    <div className="card lg:card-side bg-base-100 shadow-xl font-poppins relative border border-[#74C138]">
       <figure className="lg:w-1/3">
         <img src={img} alt="Album" className="h-full w-full" />
       </figure>
