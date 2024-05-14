@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import { toast } from "react-toastify";
 import googleLogo from "../../assets/images/google.png"
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const { logIn, googleLogIn } = useContext(AuthContext);
@@ -44,6 +45,9 @@ const Login = () => {
   };
   return (
     <div className="hero min-h-screen font-poppins mt-[68px] z-10 w-full container mx-auto mb-8">
+      <Helmet>
+        <title>Login | Fixi-Fix</title>
+      </Helmet>
       <div className="flex flex-col md:flex-row-reverse border-2 md:rounded-2xl border-[#74C138] w-full ">
         <div className="text-center lg:text-left w-full md:w-[1/2] min-h-64  bg-[url('https://i.ibb.co/wQc3BmY/undraw-Access-account-re-8spm-2.png')] bg-center bg-cover shadow-xl  md:rounded-r-2xl flex justify-center items-center  ">
           <div className="backdrop-blur-sm bg-white/5 w-full h-64 md:h-full md:rounded-r-2xl  ">

@@ -7,6 +7,7 @@ import { MdEmail } from "react-icons/md";
 import { TbCoinTaka } from "react-icons/tb";
 import { CiLocationOn } from "react-icons/ci";
 import { ClimbingBoxLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 
 const ViewDetails = () => {
   const [views, setViews] = useState(0);
@@ -45,6 +46,9 @@ const ViewDetails = () => {
 
   return (
     <div className="mt-20 font-roboto mb-8">
+        <Helmet>
+        <title>View Details of {service?.name}</title>
+      </Helmet>
       <div className="">
         <h1 className="text-3xl text-center mb-8">
           Welcome to {service?.name} Service

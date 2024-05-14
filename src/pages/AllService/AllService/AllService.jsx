@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import { ClimbingBoxLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 
 const AllService = () => {
   const axiosSecure = useAxiosSecure();
@@ -31,6 +32,9 @@ const AllService = () => {
 
   if (isPending) {
     return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+      <Helmet>
+        <title>All Services | Fixi-Fix</title>
+      </Helmet>
     <ClimbingBoxLoader color="#74c138" />
 </div>;
   }
@@ -60,6 +64,9 @@ const AllService = () => {
   };
   return (
     <div className="container mx-auto mt-20 mb-8">
+      <Helmet>
+        <title>All Services | Fixi-Fix</title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-center mb-4">All Services</h1>
       <div className="flex flex-col-reverse md:flex-row gap-4 justify-center items-center mb-8">
         {/* filter */}

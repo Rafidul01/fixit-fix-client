@@ -4,6 +4,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import bgImg from "../../assets/images/AddServiceBack.jpg";
 import { ClimbingBoxLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 const BookedServices = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
@@ -18,6 +19,9 @@ const BookedServices = () => {
 
   if (isPending) {
     return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+        <Helmet>
+        <title>Booked Service | Fixi-Fix</title>
+      </Helmet>
     <ClimbingBoxLoader color="#74c138" />
 </div>
   }
@@ -27,7 +31,11 @@ const BookedServices = () => {
 
   return (
     <div>
+        <Helmet>
+        <title>Booked Service | Fixi-Fix</title>
+      </Helmet>
       <div className="font-roboto ">
+
         <div
           className="hero min-h-screen bg-base-200 "
           style={{

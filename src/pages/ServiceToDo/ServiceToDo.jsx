@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import bgImg from "../../assets/images/AddServiceBack.jpg";
 import ToDo from "./ToDo";
 import { ClimbingBoxLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 
 const ServiceToDo = () => {
   const axiosSecure = useAxiosSecure();
@@ -20,6 +21,9 @@ const ServiceToDo = () => {
 
   if (isPending) {
     return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+        <Helmet>
+        <title>To Do | Fixi-Fix</title>
+      </Helmet>
     <ClimbingBoxLoader color="#74c138" />
 </div>
   }
@@ -31,6 +35,9 @@ const ServiceToDo = () => {
   return (
     <div>
       <div className="font-roboto ">
+      <Helmet>
+        <title>To Do | Fixi-Fix</title>
+      </Helmet>
 
         <div
           className="hero min-h-screen bg-base-200 "

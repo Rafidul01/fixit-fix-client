@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import { ClimbingBoxLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 
 const Booking = () => {
   const { id } = useParams();
@@ -64,6 +65,9 @@ const Booking = () => {
 
   return (
     <div className="font-roboto ">
+        <Helmet>
+        <title>Booking | Fixi-Fix</title>
+      </Helmet>
       <div
         className="hero min-h-screen bg-base-200 "
         style={{

@@ -4,6 +4,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 // import useAxiosSecure from "../../hooks/useAxiosSecure";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const AddService = () => {
     const {user} = useContext(AuthContext);
@@ -37,6 +38,9 @@ const AddService = () => {
   };
   return (
     <div className="font-roboto ">
+      <Helmet>
+        <title>Add Service | Fixi-Fix</title>
+      </Helmet>
       <div
         className="hero min-h-screen bg-base-200 "
         style={{

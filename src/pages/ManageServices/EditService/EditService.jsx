@@ -7,34 +7,31 @@ import { useQuery } from "@tanstack/react-query";
 // import { DiBackbone } from "react-icons/di";
 import { useParams } from "react-router-dom";
 import { ClimbingBoxLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 
 const EditService = () => {
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+  const { id } = useParams();
+  const { isPending, data: service } = useQuery({
+    queryKey: ["service", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/services/${id}`);
+      return res.data;
+    },
+  });
 
-    const {user} = useContext(AuthContext);
-    const axiosSecure = useAxiosSecure();
-    const { id } = useParams();
-    const { isPending, data: service } = useQuery({
-        queryKey: ["service", id],
-        queryFn: async () => {
-          const res = await axiosSecure.get(`/services/${id}`);
-          return res.data;
-        },
-      });
-
-      if(isPending) {
-        return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+  if (isPending) {
+    return (
+      <div className="flex justify-center  items-center min-h-[calc(100vh-260.8px)]">
+        <Helmet>
+          <title> Edit Service | Fixi-Fix</title>
+        </Helmet>
         <ClimbingBoxLoader color="#74c138" />
-    </div>
-      }
-      const {
-        _id,
-        name,
-        price,
-        description,
-        img,
-        area,
-        
-      } = service;
+      </div>
+    );
+  }
+  const { _id, name, price, description, img, area } = service;
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
@@ -46,24 +43,35 @@ const EditService = () => {
     const userEmail = user?.email;
     const userName = user?.displayName;
     const userImage = user?.photoURL;
-    const service = { name, price, description, img, area, userEmail, userName, userImage };
+    const service = {
+      name,
+      price,
+      description,
+      img,
+      area,
+      userEmail,
+      userName,
+      userImage,
+    };
     console.log(service);
-    axiosSecure.put(`/service/${_id}`, service)
-    .then((res) => {
-        console.log(res.data);
+    axiosSecure.put(`/service/${_id}`, service).then((res) => {
+      console.log(res.data);
       if (res.data.modifiedCount) {
         Swal.fire({
-            title: 'Success!',
-            text: 'UpdatedSuccessfully!',
-            icon: 'success',
-            confirmButtonText: 'OK'
-          })
+          title: "Success!",
+          text: "UpdatedSuccessfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
         e.target.reset();
       }
     });
   };
-    return (
-        <div className="font-roboto ">
+  return (
+    <div className="font-roboto ">
+      <Helmet>
+        <title>Edit Service {user?.displayName} | Fixi-Fix</title>
+      </Helmet>
       <div
         className="hero min-h-screen bg-base-200 "
         style={{
@@ -89,7 +97,6 @@ const EditService = () => {
                     placeholder={name}
                     className="input input-bordered "
                     defaultValue={name}
-                    
                   />
                 </div>
                 <div className="form-control w-full">
@@ -104,7 +111,6 @@ const EditService = () => {
                     placeholder={img}
                     className="input input-bordered"
                     defaultValue={img}
-                    
                   />
                 </div>
               </div>
@@ -119,7 +125,6 @@ const EditService = () => {
                   <select
                     className="select select-bordered"
                     name="serviceArea"
-                    
                     defaultValue={area}
                   >
                     <option disabled>{area}</option>
@@ -206,7 +211,7 @@ const EditService = () => {
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default EditService;
