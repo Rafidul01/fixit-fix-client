@@ -22,7 +22,7 @@ const ServiceToDo = () => {
   }
 
   if(services.length === 0){
-    return <div className="text-center mt-72 font-bold text-xl ">You do not have any service to do!</div>    
+    return <div className="text-center pt-60 font-bold text-xl min-h-[calc(100vh-260.8px)]">You do not have any service to do!</div>    
   }
 
   return (
@@ -37,7 +37,7 @@ const ServiceToDo = () => {
             backgroundPosition: "center",
           }}
         >
-          <div className="mt-[75px] md:mt-[80px] lg:mt-[80px">
+          <div className="mt-[75px] md:mt-[80px] lg:mt-[80px] mb-10">
             <div className="card shrink-0 w-[300px] md:w-[700px] lg:w-[900px] h-full shadow-2xl backdrop-blur-sm bg-white/80 mx-auto">
               <div className="card-body">
                 <div className="overflow-x-auto">
@@ -47,8 +47,8 @@ const ServiceToDo = () => {
                       <tr>
                         <th>Image</th>
                         <th>Name</th>
-                        <th>Job</th>
-                        <th>Favorite Color</th>
+                        <th>Date</th>
+                        <th>Status</th>
                       </tr>
                     </thead>
                     {services ? (
@@ -63,8 +63,8 @@ const ServiceToDo = () => {
                       <tr>
                         <th>Image</th>
                         <th>Name</th>
-                        <th>Job</th>
-                        <th>Favorite Color</th>
+                        <th>Date</th>
+                        <th>Status</th>
                       </tr>
                     </tfoot>
                   </table>

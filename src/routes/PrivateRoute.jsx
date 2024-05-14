@@ -8,7 +8,7 @@ const PrivateRoute = ({children}) => {
     const {user, loading} = useContext(AuthContext);
     const location = useLocation();
     if(loading){
-        return <div className='flex justify-center items-center mt-28'>
+        return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
             <ClimbingBoxLoader color="#74c138" />
         </div>
     }
