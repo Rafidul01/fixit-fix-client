@@ -3,6 +3,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../provider/AuthProvider";
 import { useContext, useState } from "react";
 import ManageCard from "./ManageCard/ManageCard";
+import { ClimbingBoxLoader } from "react-spinners";
 
 const ManageServices = () => {
 
@@ -20,7 +21,9 @@ const ManageServices = () => {
       });
 
     if(isPending){
-        return <div>Loading...</div>
+        return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+        <ClimbingBoxLoader color="#74c138" />
+    </div>
     }
   return (
     <div className="font-roboto grid grid-cols-1 gap-5 mt-20">

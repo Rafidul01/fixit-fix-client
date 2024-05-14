@@ -3,7 +3,7 @@ import logo from "../../assets/images/logo.png";
 
 const Footer = () => {
   return (
-    <div className="bg-base-100  border-t shadow-2xl border-[#74C138] text-base-content  font-lato">
+    <div className="  border-t shadow-2xl border-[#74C138] text-base-content  font-lato rounded-t-3xl  backdrop-blur-sm bg-green-500/5">
       <footer className="footer p-10 container mx-auto items-center">
         <aside>
           <img
@@ -23,13 +23,7 @@ const Footer = () => {
           <Link  className="link link-hover"><span className="font-bold">Mobile : </span>+880 102 220001</Link>
           
         </nav>
-        <nav className="">
-          <h6 className="footer-title text-[#74C138]">Pages</h6>
-          <Link to="/" className="link link-hover">Home</Link>
-          <Link to="/addService" className="link link-hover">Add Service</Link>
-          <Link to="/manageService" className="link link-hover">Manage Services</Link>
-          
-        </nav>
+
         <nav>
           <h6  className="footer-title text-[#74C138]">Social</h6>
           <div className="grid grid-flow-col gap-4">

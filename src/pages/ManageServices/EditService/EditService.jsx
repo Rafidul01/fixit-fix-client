@@ -6,6 +6,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 // import { DiBackbone } from "react-icons/di";
 import { useParams } from "react-router-dom";
+import { ClimbingBoxLoader } from "react-spinners";
 
 const EditService = () => {
 
@@ -21,7 +22,9 @@ const EditService = () => {
       });
 
       if(isPending) {
-        return <h1>Loading.........</h1>
+        return <div className='flex justify-center  items-center min-h-[calc(100vh-260.8px)]'>
+        <ClimbingBoxLoader color="#74c138" />
+    </div>
       }
       const {
         _id,

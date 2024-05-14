@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { ClimbingBoxLoader } from "react-spinners";
 import FeedBack from "../FeedBack/FeedBack";
 import WhatWeDo from "../../WhatWeDo/WhatWeDo";
+import FAQs from "../FAQ/FAQs";
 
 const Home = () => {
   const axiosSecure = useAxiosSecure();
@@ -27,6 +28,7 @@ const Home = () => {
           <PopularService popularServices={popularServices}></PopularService>
           <FeedBack></FeedBack>
           <WhatWeDo></WhatWeDo> 
+          <FAQs></FAQs>
         </div>
     );
 };
