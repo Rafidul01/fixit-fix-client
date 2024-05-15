@@ -47,10 +47,16 @@ const AllService = () => {
     if (value === "Most Booked") {
       setFilter("booked");
     }
+    if(value === "All"){
+      setFilter(null);
+    }
   };
   const handleReset = () => {
     setFilter(null);
     setSearch("");
+    document.getElementById("handleReSet").value = "";
+    document.getElementById("mySelect").selectedIndex = 0;
+    
     
   };
 
@@ -70,16 +76,19 @@ const AllService = () => {
       <h1 className="text-4xl font-bold text-center mb-4">All Services</h1>
       <div className="flex flex-col-reverse md:flex-row gap-4 justify-center items-center mb-8">
         {/* filter */}
-        <div className="flex gap-4 justify-between items-center">
+        <div className="flex gap-4 justify-between items-center ">
           <select
             className="select select-bordered"
             name="serviceArea"
+            id="mySelect" 
+            
             required
             defaultValue={filter ? filter : "Filter"}
             onChange={handleFilter}
           >
             <option disabled>Filter</option>
             <option>Most Booked</option>
+            <option>All</option>
           </select>
 
           {/* reset */}
@@ -92,12 +101,12 @@ const AllService = () => {
 
         {/* search */}
         <div>
-          <form action="" className="flex " onSubmit={handleSearch}>
+          <form action="" className="flex" onSubmit={handleSearch}>
             <input
               type="text"
               placeholder="Search"
               name="search"
-
+              id="handleReSet"
               className="input input-bordered w-full max-w-xs rounded-r-none border-r-0"
             />
             <button className="btn rounded-l-none bg-[#74C138] text-white hover:text-[#74C138] hover:bg-transparent">
