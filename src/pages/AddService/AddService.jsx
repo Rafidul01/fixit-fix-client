@@ -37,7 +37,7 @@ const AddService = () => {
     });
   };
   return (
-    <div className="font-roboto ">
+    <div className="font-roboto">
       <Helmet>
         <title>Add Service | Fixi-Fix</title>
       </Helmet>
@@ -49,7 +49,7 @@ const AddService = () => {
           backgroundPosition: "center",
         }}
       >
-        <div className="mt-[75px] md:mt-[80px] lg:mt-[80px">
+        <div className="mt-[75px] md:mt-[80px] lg:mt-[80px] mb-8">
           <div className="card shrink-0 w-[300px] md:w-[700px] lg:w-[900px] h-full shadow-2xl backdrop-blur-sm bg-white/20 mx-auto">
             <form className="card-body" onSubmit={handleSubmit}>
               {/* row 1 */}
