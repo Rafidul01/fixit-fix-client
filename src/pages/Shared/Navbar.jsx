@@ -3,10 +3,12 @@ import logo from "../../assets/images/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isDashboardOpen, setIsDashboardOpen] = useState(false);
+  const axiosSecure = useAxiosSecure();
 
   const { user, logOut } = useContext(AuthContext);
 
@@ -30,6 +32,8 @@ const Navbar = () => {
     logOut()
       .then(() => {
         toast.success("Loged out Successful!");
+        axiosSecure.post("/logout", { user_email: user.email })
+          .then()
       })
       .catch(() => {
         toast.success("Logout failed");
