@@ -7,6 +7,7 @@ import { ClimbingBoxLoader } from "react-spinners";
 import { Helmet } from "react-helmet";
 import Rating from "react-rating";
 import { FaStar } from "react-icons/fa";
+import Swal from "sweetalert2";
 const BookedServices = () => {
   const [ratingValue, setRatingValue] = useState(0);
   const [reatingCount, setRatingCount] = useState(0);
@@ -56,6 +57,13 @@ const BookedServices = () => {
     axiosSecure.patch(`/service/ratings/${id}?rating=${rating}&avRating=${avRating}`)
       .then((res) => {
         console.log(res.data);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Thank You For Your Feedback',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
       .catch((err) => {
         console.log(err);
