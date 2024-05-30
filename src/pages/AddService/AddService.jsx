@@ -22,8 +22,10 @@ const AddService = () => {
     const userImage = user?.photoURL;
     const views = "0";
     const booked = 0;
-    const service = { name, price, description, img, area, userEmail, userName, userImage, views, booked };
-    axios.post("https://fixit-fix-server.vercel.app/service", service)
+    const rating = 0;
+    const ratingCount = 0;
+    const service = { name, price, description, img, area, userEmail, userName, userImage, views, booked, rating, ratingCount };
+    axios.post("http://localhost:5000/service", service)
     .then((res) => {
       if (res.data.insertedId) {
         Swal.fire({

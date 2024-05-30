@@ -37,7 +37,7 @@ const EditService = () => {
     const form = new FormData(e.target);
     const name = form.get("serviceName");
     const price = form.get("servicePrice");
-    const area = form.get("serviceArea");
+    const area = e.target.serviceArea.value;
     const description = form.get("serviceDescription");
     const img = form.get("sImageURL");
     const userEmail = user?.email;
@@ -63,7 +63,7 @@ const EditService = () => {
           icon: "success",
           confirmButtonText: "OK",
         });
-        e.target.reset();
+        // e.target.reset();
       }
     });
   };

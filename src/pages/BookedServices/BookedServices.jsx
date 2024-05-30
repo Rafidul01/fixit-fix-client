@@ -1,11 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import bgImg from "../../assets/images/AddServiceBack.jpg";
 import { ClimbingBoxLoader } from "react-spinners";
 import { Helmet } from "react-helmet";
+import Rating from "react-rating";
+import { FaStar } from "react-icons/fa";
 const BookedServices = () => {
+  const [ratingValue, setRatingValue] = useState(0);
+  const [reatingCount, setRatingCount] = useState(0);
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
 
@@ -28,6 +32,35 @@ const BookedServices = () => {
   if(services.length === 0){
     return <div className="text-center pt-60 font-bold text-xl min-h-[calc(100vh-260.8px)] ">You do not have any service booked!</div>    
   }
+
+
+  const handleRating = (id, rating) => {
+
+    
+    
+    // axiosSecure.get(`/services/${id}`)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setRatingCount(res.data?.ratingCount + 1);
+    //     setRatingValue(res.data?.rating + rating);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+     
+    // console.log(reatingCount, ratingValue);
+    console.log(rating);
+    const avRating = ratingValue/reatingCount;
+    setRatingValue(0);
+    setRatingCount(0);
+    axiosSecure.patch(`/service/ratings/${id}?rating=${rating}&avRating=${avRating}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
@@ -56,6 +89,7 @@ const BookedServices = () => {
                         <th>Name</th>
                         <th>Date</th>
                         <th>Status</th>
+                        <th></th>
                        
                       </tr>
                     </thead>
@@ -81,7 +115,7 @@ const BookedServices = () => {
                                 <div>
                                   <div className="font-bold">{service.name}</div>
                                   <div className="text-sm opacity-50">
-                                    United States
+                                    {service.area}
                                   </div>
                                 </div>
                               </div>
@@ -99,6 +133,19 @@ const BookedServices = () => {
                                 service.status === "completed" && <td className="text-green-500" >{service.status}</td>
                             }
                             
+                            <td>
+                            {
+                                
+                                service.status === "completed" && <Rating
+                                onChange={(e) => handleRating(service.serviceId,e)}
+                                placeholderRating={1}
+                                emptySymbol={<FaStar className="text-black"></FaStar>}
+                                placeholderSymbol={<FaStar className="text-yellow-600"></FaStar>}
+                                fullSymbol={<FaStar className="text-yellow-600"></FaStar>}
+                          />
+                            }
+                            
+                            </td>
                             
                           </tr>
                         </tbody>

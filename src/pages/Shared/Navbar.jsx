@@ -129,6 +129,18 @@ const Navbar = () => {
                 Service To Do
               </NavLink>
             </li>
+            <li className="hover:text-[#74C138] ">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "border bg-transparent border-[#74C138] text-[#74C138] font-bold "
+                    : ""
+                }
+                to="/topRated"
+              >
+                Top Rated
+              </NavLink>
+            </li>
           </ul>
         </details>
       </li>

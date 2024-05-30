@@ -1,7 +1,7 @@
 import axios from "axios";
-
+//https://fixit-fix-server.vercel.app
 const axiosSecure = axios.create({
-    baseURL: "https://fixit-fix-server.vercel.app",
+    baseURL: "http://localhost:5000",
     withCredentials: true,
 })
 const useAxiosSecure = () => {

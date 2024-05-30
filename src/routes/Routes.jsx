@@ -13,6 +13,7 @@ import EditService from "../pages/ManageServices/EditService/EditService";
 import BookedServices from "../pages/BookedServices/BookedServices";
 import ServiceToDo from "../pages/ServiceToDo/ServiceToDo";
 import Error from "../pages/Error/Error";
+import TopRated from "../pages/TopRated/TopRated";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
         {
           path:"/serviceToDo",
           element: <PrivateRoute><ServiceToDo/></PrivateRoute>
+        },
+        {
+          path:"/topRated",
+          element: <PrivateRoute><TopRated></TopRated></PrivateRoute>
         }
     ]
   },
